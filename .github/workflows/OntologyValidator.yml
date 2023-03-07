@@ -34,10 +34,10 @@ jobs:
       if: ${{ github.event_name == 'push' }}
       uses: actions/checkout@v3
     
-    - name: Set up Python 3.7
-      uses: actions/setup-python@v2
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v1
       with:
-        python-version: 3.7
+        python-version: '3.11'
         
     - name: Get modified entity type files
       id: changed-entity-type-files
