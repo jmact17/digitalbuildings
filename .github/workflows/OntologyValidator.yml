@@ -67,8 +67,8 @@ jobs:
     - name: Commit files changed by types GUID generator
       uses: EndBug/add-and-commit@v9
       with:
-        author_name: auto_type_guid_generator
-        author_email: support-digitalbuildings@google.com
+        author_name: db-robot
+        author_email: db-robot@google.com
         message: 'Add GUIDs to new entity types'
     
     - name: Run ontology YAML validator on ontology extensions
