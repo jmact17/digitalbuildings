@@ -26,6 +26,7 @@ CH_SS_SWTC:
   - SWTC
 
 CH_SS_SWTC_TEST:
+  guid: "a7a33ea0-2f42-4bed-bae5-8e29d5889879"
   description: "TEST Simple air cooled chiller."
   is_canonical: true
   implements:
@@ -34,6 +35,7 @@ CH_SS_SWTC_TEST:
   - SWTC
 
 CH_SS_SWTC_ANOTHER_TEST:
+  guid: "530ecda6-5acc-4276-9b88-2b83ef08c68f"
   description: "ANOTHER TEST Simple air cooled chiller."
   is_canonical: true
   implements:
