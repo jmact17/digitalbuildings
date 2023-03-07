@@ -15,6 +15,9 @@
 DOOR:
   guid: "a8aab043-80c4-4276-ac2d-6aeca9e4644f"
   description: "A physical door"
+  
+ANOTHER_DOOR:
+  description: "Another physical door"
 
 ROOM:
   guid: "731dcd1a-b680-4562-b05d-af250d0c77eb"
