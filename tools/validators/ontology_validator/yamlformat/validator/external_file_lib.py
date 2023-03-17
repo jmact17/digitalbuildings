@@ -43,6 +43,7 @@ def Validate(filter_text,
     original_directory: the original directory with ontology yaml files.
     changed_directory: the changed directory with ontology yaml files.
     interactive: flag to run validator in interactive mode or presubmit mode.
+    skip_type_guid_checks: whether type guids are allowed to be missing.
   Raises:
     Exception: The Ontology is not valid.
   """
@@ -52,14 +53,21 @@ def Validate(filter_text,
 
   modified_base = RecursiveDirWalk(original_directory)
   modified_client = RecursiveDirWalk(changed_directory)
+  
+  type_guids_required = True
+  if skip_type_guid_checks:
+    type_guids_required = False
 
   if interactive:
-    presubmit_validate_types_lib.RunInteractive(filter_text, modified_base,
-                                                modified_client)
+    presubmit_validate_types_lib.RunInteractive(filter_text,
+                                                modified_base,
+                                                modified_client,
+                                                type_guids_required)
   else:
     findings = presubmit_validate_types_lib.RunPresubmit([],
                                                          modified_base,
-                                                         modified_client)
+                                                         modified_client,
+                                                         type_guids_required)
     presubmit_validate_types_lib.PrintFindings(findings, '')
     # TODO(charbelk): add diff files in the presubmit in modified base
     findings_class = findings_lib.Findings()
