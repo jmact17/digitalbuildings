@@ -57,5 +57,15 @@ def CreateParser() -> argparse.ArgumentParser:
       metavar='interactive mode'
   )
 
+  parser.add_argument(
+      '-c',
+      '--check_type_guids',
+      dest='check_type_guids',
+      default='True',
+      help='Boolean indicating whether the validator should validate entity type guids',
+      required=False,
+      metavar='check type guids'
+  )
+
   return parser
 
