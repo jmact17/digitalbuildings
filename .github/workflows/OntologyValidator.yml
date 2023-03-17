@@ -67,7 +67,14 @@ jobs:
         author_email: db-robot@google.com
         message: 'Add GUIDs to new entity types'
 
-    - name: Run ontology YAML validator on ontology extensions
+    - name: Run ontology YAML validator without type guid checks if PR
+      if: github.event_name == 'pull_request'
       run: |
-        python validator.py --original=../../../../ontology/yaml/resources  --interactive=False --push=${{ github.event_name == 'push' }}
+        python validator.py --original=../../../../ontology/yaml/resources  --interactive=False  --skip_type_guid_checks
+      working-directory: ./tools/validators/ontology_validator/yamlformat
+
+    - name: Run ontology YAML validator with type guid checks if push
+      if: github.event_name == 'push'
+      run: |
+        python validator.py --original=../../../../ontology/yaml/resources  --interactive=False
       working-directory: ./tools/validators/ontology_validator/yamlformat
