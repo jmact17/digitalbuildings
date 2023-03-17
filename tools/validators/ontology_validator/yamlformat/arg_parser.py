@@ -63,7 +63,7 @@ def CreateParser() -> argparse.ArgumentParser:
       action='store_true',
       dest='skip_type_guid_checks',
       default='False',
-      help='specify if the validator should not validate entity type guids',
+      help='specify if the validator should not require entity type guids',
       required=False,
       metavar='skip type guid checks'
   )
