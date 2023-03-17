@@ -47,7 +47,7 @@ def main(parsed_args: argparse.ArgumentParser):
       path.expanduser(args.original),
       modified_types_filepath,
       interactive=ast.literal_eval(parsed_args.interactive),
-      parsed_args.check_type_guids)
+      parsed_args.skip_type_guid_checks)
 
 if __name__ == '__main__':
   args = CreateParser().parse_args(sys.argv[1:])
