@@ -43,7 +43,7 @@ def Validate(filter_text,
     original_directory: the original directory with ontology yaml files.
     changed_directory: the changed directory with ontology yaml files.
     interactive: flag to run validator in interactive mode or presubmit mode.
-    skip_type_guid_checks: whether type guids are allowed to be missing.
+    require_type_guids: whether type guids are required to be present.
   Raises:
     Exception: The Ontology is not valid.
   """
