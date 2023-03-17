@@ -185,9 +185,10 @@ class EntityTypeFolder(config_folder_lib.ConfigFolder):
 
   Attributes:
     local_namespace: TypeNamespace object representing this namespace.
+    require_guid: boolean indicating whether the type guid is required.
   """
 
-  def __init__(self, folderpath, field_universe=None, guid_required=True):
+  def __init__(self, folderpath, field_universe=None, require_guid=True):
     """Init.
 
     Args:
@@ -195,10 +196,12 @@ class EntityTypeFolder(config_folder_lib.ConfigFolder):
         type files. Path should be relative to google3/ and have no leading or
         trailing /.
       field_universe: optional FieldsUniverse object.
+      require_guid: boolean indicating whether the type guid is required.
     """
     super(EntityTypeFolder, self).__init__(folderpath,
                                            base_lib.ComponentType.ENTITY_TYPE)
     self.local_namespace = TypeNamespace(self._namespace_name, field_universe)
+    self.require_guid = require_guid
 
   def Finalize(self):
     """Call to complete entity creation after all types are added."""
@@ -207,7 +210,7 @@ class EntityTypeFolder(config_folder_lib.ConfigFolder):
   def _AddFromConfigHelper(self, document, context):
     for type_name in document:
       new_type = self._ConstructType(type_name, document[type_name],
-                                     context.filepath, guid_required)
+                                     context.filepath, self.require_guid)
       self._AddType(new_type)
 
   def _ConstructField(self, local_field_names, optional, output_array):
@@ -718,9 +721,9 @@ class EntityType(findings_lib.Findings):
 
     # Check for correct GUID format.
     if self.guid is not None and not ENTITY_TYPE_GUID_PATTERN.match(self.guid):
-        self.AddFinding(findings_lib.InvalidTypeGuidError(self))
+      self.AddFinding(findings_lib.InvalidTypeGuidError(self))
     if guid_required and self.guid is None:
-        self.AddFinding(findings_lib.MissingTypeGuidError(self))
+      self.AddFinding(findings_lib.MissingTypeGuidError(self))
 
     # Passthrough types cannot be inherited, so make sure they are not defined
     # as abstract.
