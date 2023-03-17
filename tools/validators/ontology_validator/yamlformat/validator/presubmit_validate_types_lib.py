@@ -670,7 +670,7 @@ def RunPresubmit(unmodified,
   """
 
   findings, _ = _ValidateConfigInner(unmodified, modified_base, modified_client,
-                                     False)
+                                     False, require_type_guids)
   return findings
 
 
