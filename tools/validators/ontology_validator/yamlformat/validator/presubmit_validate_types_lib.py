@@ -652,7 +652,10 @@ def CheckBackwardsCompatibility(new_universe, old_universe):
   return findings
 
 
-def RunPresubmit(unmodified, modified_base, modified_client, require_type_guids):
+def RunPresubmit(unmodified,
+                 modified_base,
+                 modified_client,
+                 require_type_guids=True):
   """Top level runner for presubmit.
 
   Args:
@@ -724,7 +727,10 @@ def PrintFindings(findings, filter_text):
   print('\n' + str(len(findings)) + ' findings.\n')
 
 
-def RunInteractive(filter_text, modified_base, modified_client, require_type_guids):
+def RunInteractive(filter_text,
+                   modified_base,
+                   modified_client,
+                   require_type_guids=True):
   """Runs interactive mode when presubmit is run as a standalone application.
 
   This will run all files in the ontology as if they were new.
