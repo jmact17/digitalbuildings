@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the License);
 # you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""external_file_lib relies on external pyhton libraries non-dependent on g3.
+"""external_file_lib relies on external python libraries non-dependent on g3.
 
  It contains helper methods to run this validator outside of g3.
 """
@@ -31,7 +31,8 @@ from yamlformat.validator import presubmit_validate_types_lib
 def Validate(filter_text,
              original_directory,
              changed_directory,
-             interactive=True):
+             interactive=True,
+             skip_type_guid_checks=False):
   """Validates two directory paths of a diff of ontology versions.
 
   if the user didn't provide a changed directory, treat as a new ontology by
