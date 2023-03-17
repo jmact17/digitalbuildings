@@ -32,7 +32,7 @@ def Validate(filter_text,
              original_directory,
              changed_directory,
              interactive=True,
-             skip_type_guid_checks=False):
+             require_type_guids=True):
   """Validates two directory paths of a diff of ontology versions.
 
   if the user didn't provide a changed directory, treat as a new ontology by
@@ -53,21 +53,17 @@ def Validate(filter_text,
 
   modified_base = RecursiveDirWalk(original_directory)
   modified_client = RecursiveDirWalk(changed_directory)
-  
-  type_guids_required = True
-  if skip_type_guid_checks:
-    type_guids_required = False
 
   if interactive:
     presubmit_validate_types_lib.RunInteractive(filter_text,
                                                 modified_base,
                                                 modified_client,
-                                                type_guids_required)
+                                                require_type_guids)
   else:
     findings = presubmit_validate_types_lib.RunPresubmit([],
                                                          modified_base,
                                                          modified_client,
-                                                         type_guids_required)
+                                                         require_type_guids)
     presubmit_validate_types_lib.PrintFindings(findings, '')
     # TODO(charbelk): add diff files in the presubmit in modified base
     findings_class = findings_lib.Findings()
