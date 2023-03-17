@@ -230,7 +230,7 @@ class EntityTypeFolder(config_folder_lib.ConfigFolder):
                   increment=increment),
               optional=optional))
 
-  def _ConstructType(self, type_name, type_contents, filepath, guid_required):
+  def _ConstructType(self, type_name, type_contents, filepath, require_guid):
     """Reads a entity type config block and generates an EntityType object."""
 
     description = ''
@@ -282,7 +282,7 @@ class EntityTypeFolder(config_folder_lib.ConfigFolder):
         inherited_fields_expanded=False,
         is_canonical=is_canonical,
         guid=guid,
-        guid_required=guid_required,
+        require_guid=require_guid,
         namespace=self.local_namespace)
 
     # Add errors to type if there's anything extra in the block.  We add to the
@@ -504,7 +504,7 @@ class EntityType(findings_lib.Findings):
                inherited_fields_expanded=False,
                is_canonical=False,
                guid=None,
-               guid_required=True,
+               require_guid=True,
                namespace=None):
     """Init.
 
@@ -523,7 +523,7 @@ class EntityType(findings_lib.Findings):
        inherited_fields_expanded: boolean. Should be false at init.
        is_canonical: boolean indicating if this is a curated canonical type.
        guid: the UUID4-formatted GUID of this type
-       guid_required: boolean indicating if the guid is required to be present
+       require_guid: boolean indicating if the guid is required to be present
        namespace: a reference to the namespace object the entity belongs to
     """
     super(EntityType, self).__init__()
@@ -562,7 +562,7 @@ class EntityType(findings_lib.Findings):
     self.guid = guid
 
     # TODO(berkoben) update this method to use tuples if possible
-    self._ValidateType(local_field_names, guid_required)
+    self._ValidateType(local_field_names, require_guid)
 
   def HasOptionalFields(self, run_unsafe=False):
     if not (self.inherited_fields_expanded or run_unsafe):
