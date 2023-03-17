@@ -58,13 +58,14 @@ def CreateParser() -> argparse.ArgumentParser:
   )
 
   parser.add_argument(
-      '-c',
-      '--check_type_guids',
-      dest='check_type_guids',
-      default='True',
-      help='Boolean indicating whether the validator should validate entity type guids',
+      '-s',
+      '--skip_type_guid_checks',
+      action='store_true',
+      dest='skip_type_guid_checks',
+      default='False',
+      help='specify if the validator should not validate entity type guids',
       required=False,
-      metavar='check type guids'
+      metavar='skip type guid checks'
   )
 
   return parser
