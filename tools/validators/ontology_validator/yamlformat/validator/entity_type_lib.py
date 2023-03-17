@@ -698,7 +698,7 @@ class EntityType(findings_lib.Findings):
                 run_unsafe: bool = False) -> Optional[OptWrapper]:
     return self.GetAllFields(run_unsafe).get(fully_qualified_fieldname)
 
-  def _ValidateType(self, local_field_names, guid_required):
+  def _ValidateType(self, local_field_names, require_guid):
     """Validates that the entity type is formatted correctly.
 
     Checks for formatting and duplicate fields and parents.
@@ -707,7 +707,7 @@ class EntityType(findings_lib.Findings):
 
     Args:
       local_field_names: list of local field names for the type.
-      guid_required: boolean indicating whether the guid is required.
+      require_guid: boolean indicating whether the guid is required.
     """
     # Make sure the typename is non-empty.
     if not self.typename:
@@ -722,7 +722,7 @@ class EntityType(findings_lib.Findings):
     # Check for correct GUID format.
     if self.guid is not None and not ENTITY_TYPE_GUID_PATTERN.match(self.guid):
       self.AddFinding(findings_lib.InvalidTypeGuidError(self))
-    if guid_required and self.guid is None:
+    if require_guid and self.guid is None:
       self.AddFinding(findings_lib.MissingTypeGuidError(self))
 
     # Passthrough types cannot be inherited, so make sure they are not defined
