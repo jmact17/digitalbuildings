@@ -62,8 +62,7 @@ def CreateParser() -> argparse.ArgumentParser:
       '--allow_missing_type_guids',
       action='store_true',
       dest='allow_missing_type_guids',
-      help='if the validator should not require entity type guids',
-      metavar='ALLOW_MISSING_TYPE_GUIDS'
+      help='if the validator should not require entity type guids'
   )
 
   return parser
