@@ -58,14 +58,12 @@ def CreateParser() -> argparse.ArgumentParser:
   )
 
   parser.add_argument(
-      '-s',
-      '--skip_type_guid_checks',
+      '-a',
+      '--allow_missing_type_guids',
       action='store_true',
-      dest='skip_type_guid_checks',
-      default='False',
-      help='specify if the validator should not require entity type guids',
-      required=False,
-      metavar='skip type guid checks'
+      dest='allow_missing_type_guids',
+      help='if the validator should not require entity type guids',
+      metavar='ALLOW_MISSING_TYPE_GUIDS'
   )
 
   return parser
