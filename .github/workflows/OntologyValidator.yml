@@ -80,5 +80,5 @@ jobs:
     - name: Run ontology YAML validator without type guid checks if PR
       if: github.event_name == 'pull_request'
       run: |
-        python validator.py --original=../../../../ontology/yaml/resources  --interactive=False  --skip_type_guid_checks
+        python validator.py --original=../../../../ontology/yaml/resources  --interactive=False  --allow_missing_type_guids
       working-directory: ./tools/validators/ontology_validator/yamlformat
